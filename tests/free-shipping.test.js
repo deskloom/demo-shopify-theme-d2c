@@ -1,7 +1,7 @@
 'use strict';
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
-const { freeShippingRemaining } = require('../assets/free-shipping');
+const { freeShippingRemaining, buildFreeShippingMessage, formatYen } = require('../assets/free-shipping');
 
 describe('free shipping remaining', () => {
   it('below threshold returns remaining', () => {
@@ -23,5 +23,18 @@ describe('free shipping remaining', () => {
     assert.equal(r.remaining, 0);
     assert.equal(r.achieved, true);
     assert.equal(r.progress, 100);
+  });
+
+  it('buildFreeShippingMessage formats remaining cents to yen', () => {
+    assert.equal(
+      buildFreeShippingMessage('あと __AMOUNT__ で送料無料', 300000),
+      'あと ¥3,000 で送料無料'
+    );
+  });
+
+  it('formatYen converts cents to yen with thousands separator', () => {
+    assert.equal(formatYen(300000), '¥3,000');
+    assert.equal(formatYen(0), '¥0');
+    assert.equal(formatYen(800000), '¥8,000');
   });
 });

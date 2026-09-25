@@ -94,11 +94,12 @@
       "add_to_cart": "Add to cart",
       "howto_content": "Demo copy. Please check the package for actual usage.",
       "ingredients_content": "Demo copy. Ingredient listing is a fictional sample.",
-      "low_stock_html": "Only {{ count }} left",
       "in_stock": "In stock",
       "quantity": "Quantity",
+      "variant": "Option",
       "shipping_content": "Demo copy. Flat 550 yen shipping, free over 8,000 yen in this example.",
       "sold_out": "Sold out",
+      "sold_out_suffix": " (Sold out)",
       "subscription_text": "Save with subscriptions. No commitment, cancel anytime.",
       "subscription_title": "Subscription info",
       "thumbnails": "Product image thumbnails"

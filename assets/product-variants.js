@@ -38,6 +38,12 @@ function formatPrice(cents) {
   return '¥' + Math.round(n / 100).toLocaleString('en-US');
 }
 
+function shouldShowPaymentButton(variant) {
+  var v = normalizeVariant(variant);
+  if (!v) return false;
+  return v.available;
+}
+
 if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', function () {
     var form = document.querySelector('[data-variant-form]');
@@ -55,6 +61,7 @@ if (typeof document !== 'undefined') {
     }
     var soldOutText = form.getAttribute('data-soldout-text') || 'Sold out';
     var inStockText = form.getAttribute('data-instock-text') || 'In stock';
+    var paymentWrapper = form.querySelector('[data-payment-button]');
     function update() {
       var current = findVariantById(variants, select ? select.value : '');
       if (!current && variants.length > 0 && select) {
@@ -67,13 +74,13 @@ if (typeof document !== 'undefined') {
         if (state.isSoldOut) button.value = soldOutText;
         else button.value = button.getAttribute('data-default-label') || 'Add';
       }
+      if (paymentWrapper) {
+        if (shouldShowPaymentButton(current)) paymentWrapper.removeAttribute('hidden');
+        else paymentWrapper.setAttribute('hidden', '');
+      }
       if (stock) {
         if (state.isSoldOut) stock.textContent = soldOutText;
-        else if (current && current.inventory_quantity != null && Number(current.inventory_quantity) <= 5) {
-          stock.textContent = String(current.inventory_quantity);
-        } else {
-          stock.textContent = inStockText;
-        }
+        else stock.textContent = inStockText;
       }
       var galleryMain = document.querySelector('[data-gallery-main]');
       if (galleryMain && current && current.featured_image) {
@@ -101,6 +108,7 @@ if (typeof module !== 'undefined' && module.exports) {
     normalizeVariant: normalizeVariant,
     getVariantState: getVariantState,
     findVariantById: findVariantById,
-    formatPrice: formatPrice
+    formatPrice: formatPrice,
+    shouldShowPaymentButton: shouldShowPaymentButton
   };
 }

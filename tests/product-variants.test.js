@@ -1,7 +1,7 @@
 'use strict';
 const { describe, it } = require('node:test');
 const assert = require('node:assert/strict');
-const { getVariantState, findVariantById, formatPrice } = require('../assets/product-variants');
+const { getVariantState, findVariantById, formatPrice, shouldShowPaymentButton } = require('../assets/product-variants');
 
 describe('product variant switching', () => {
   const available = { id: 1, price: 3300, available: true, inventory_quantity: 10 };
@@ -34,5 +34,11 @@ describe('product variant switching', () => {
 
   it('formatPrice renders yen', () => {
     assert.match(formatPrice(330000), /¥/);
+  });
+
+  it('hides dynamic payment button when sold out', () => {
+    assert.equal(shouldShowPaymentButton(available), true);
+    assert.equal(shouldShowPaymentButton(soldOut), false);
+    assert.equal(shouldShowPaymentButton(null), false);
   });
 });

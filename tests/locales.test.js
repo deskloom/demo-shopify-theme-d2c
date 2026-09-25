@@ -50,6 +50,37 @@ describe('locales', () => {
     assert.deepEqual(offenders, [], 'Japanese hardcoding found in: ' + offenders.join(', '));
   });
 
+  it('no hardcoded English prose outside schema blocks', () => {
+    const files = liquidFiles();
+    const offenders = [];
+    for (const f of files) {
+      let body = fs.readFileSync(f, 'utf8');
+      body = stripSchemaBlock(body);
+      body = body.replace(/\{%\s*stylesheet\s*%\}[\s\S]*?\{%\s*endstylesheet\s*%\}/g, ' ');
+      body = body.replace(/\{%\s*javascript\s*%\}[\s\S]*?\{%\s*endjavascript\s*%\}/g, ' ');
+      body = body.replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<script[\s\S]*?<\/script>/gi, ' ');
+      body = body.replace(/<title[\s\S]*?<\/title>/gi, ' ');
+      body = body.replace(/\{%\s*comment\s*%\}[\s\S]*?\{%\s*endcomment\s*%\}/g, ' ');
+      body = body.replace(/\{%\s*doc\s*%\}[\s\S]*?\{%\s*enddoc\s*%\}/g, ' ');
+      body = body.replace(/\{\{[\s\S]*?\}\}/g, ' ');
+      body = body.replace(/\{%[\s\S]*?%\}/g, ' ');
+      const re = />([^<>]*)</g;
+      let m;
+      let found = null;
+      while ((m = re.exec(body))) {
+        const text = m[1].replace(/\s+/g, ' ').trim();
+        if (!text) continue;
+        const words = text.match(/[A-Za-z]{2,}/g) || [];
+        if (words.length >= 2) {
+          found = text.slice(0, 80);
+          break;
+        }
+      }
+      if (found) offenders.push(path.relative(ROOT, f) + ': ' + found);
+    }
+    assert.deepEqual(offenders, [], 'English hardcoding found in: ' + offenders.join('; '));
+  });
+
   it('each section schema is valid JSON and has presets', () => {
     const sectionFiles = listFiles(path.join(ROOT, 'sections'), ['.liquid']);
     assert.ok(sectionFiles.length >= 10);
@@ -65,5 +96,21 @@ describe('locales', () => {
       assert.ok(schema, path.basename(f) + ' must have {% schema %}');
       assert.ok(Array.isArray(schema.presets) && schema.presets.length > 0, path.basename(f) + ' must have presets');
     }
+  });
+
+  it('does not use removed low-stock keys', () => {
+    const ja = JSON.parse(fs.readFileSync(path.join(ROOT, 'locales', 'ja.default.json'), 'utf8'));
+    const en = JSON.parse(fs.readFileSync(path.join(ROOT, 'locales', 'en.json'), 'utf8'));
+    const jf = flattenKeys(ja);
+    const ef = flattenKeys(en);
+    assert.ok(!('kotohana.product.low_stock_html' in jf), 'low_stock_html should be removed from ja');
+    assert.ok(!('kotohana.product.low_stock_html' in ef), 'low_stock_html should be removed from en');
+    const variantJs = fs.readFileSync(path.join(ROOT, 'assets', 'product-variants.js'), 'utf8');
+    assert.ok(!variantJs.includes('String(current.inventory_quantity)'), 'raw inventory count display should be removed');
+  });
+
+  it('product section has no dead KotohanaVariants global', () => {
+    const content = fs.readFileSync(path.join(ROOT, 'sections', 'product.liquid'), 'utf8');
+    assert.ok(!content.includes('window.KotohanaVariants'), 'dead window.KotohanaVariants should be removed');
   });
 });

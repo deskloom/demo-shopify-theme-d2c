@@ -32,10 +32,12 @@
 
 {% stylesheet %}
   header {
-    height: 5rem;
+    min-height: 5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    min-width: 0;
   }
   header a {
     position: relative;
@@ -58,6 +60,8 @@
   header .header__icons {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
+    min-width: 0;
   }
 {% endstylesheet %}
 

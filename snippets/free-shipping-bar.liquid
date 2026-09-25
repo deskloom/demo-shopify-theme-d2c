@@ -21,7 +21,7 @@
 >
   <p data-free-message
     data-achieved-text="{{ 'cart.free_achieved' | t }}"
-    data-remaining-template="{{ 'cart.free_remaining_html' | t }}"
+    data-remaining-template="{{ 'cart.free_remaining_html' | t: amount: '__AMOUNT__' }}"
   >
     {% if cart_cents >= threshold_cents %}
       {{ 'cart.free_achieved' | t }}

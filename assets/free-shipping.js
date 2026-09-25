@@ -11,6 +11,21 @@ function freeShippingRemaining(cartTotal, threshold) {
   return { remaining: remaining, achieved: achieved, progress: progress };
 }
 
+/* Same rule as product-variants.js formatPrice: cents -> yen string. */
+function formatYen(cents) {
+  var n = Number(cents);
+  if (!isFinite(n)) n = 0;
+  return '¥' + Math.round(n / 100).toLocaleString('en-US');
+}
+
+function buildFreeShippingMessage(template, remainingCents) {
+  var t = String(template == null ? '' : template);
+  var amount = formatYen(remainingCents);
+  /* Liquid passes '__AMOUNT__' as placeholder so '{{ amount }}' stays intact. */
+  if (t.indexOf('__AMOUNT__') !== -1) return t.split('__AMOUNT__').join(amount);
+  return t.replace(/\{\{\s*amount\s*\}\}/g, amount);
+}
+
 function renderFreeShippingBar(root) {
   if (!root || typeof document === 'undefined') return;
   var total = Number(root.getAttribute('data-cart-total'));
@@ -24,7 +39,7 @@ function renderFreeShippingBar(root) {
     message.textContent = message.getAttribute('data-achieved-text') || '';
   } else {
     var template = message.getAttribute('data-remaining-template') || '';
-    message.textContent = template.replace('{{ amount }}', String(result.remaining));
+    message.textContent = buildFreeShippingMessage(template, result.remaining);
   }
 }
 
@@ -36,5 +51,5 @@ if (typeof document !== 'undefined') {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { freeShippingRemaining: freeShippingRemaining, renderFreeShippingBar: renderFreeShippingBar };
+  module.exports = { freeShippingRemaining: freeShippingRemaining, renderFreeShippingBar: renderFreeShippingBar, buildFreeShippingMessage: buildFreeShippingMessage, formatYen: formatYen };
 }

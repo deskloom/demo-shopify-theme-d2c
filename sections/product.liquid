@@ -53,15 +53,14 @@
           {% endif %}
         </p>
 
-        <label for="variant-select-{{ section.id }}">{{ 'kotohana.product.quantity' | t }}</label>
+        <label for="variant-select-{{ section.id }}">{{ 'kotohana.product.variant' | t }}</label>
         <select name="id" id="variant-select-{{ section.id }}" data-variant-select>
           {% for variant in product.variants %}
             <option
               value="{{ variant.id }}"
               {% if variant.id == current_variant.id %}selected="selected"{% endif %}
-              {% unless variant.available %}disabled{% endunless %}
             >
-              {{ variant.title }} - {{ variant.price | money }}
+              {{ variant.title }} - {{ variant.price | money }}{% unless variant.available %} {{ 'kotohana.product.sold_out_suffix' | t }}{% endunless %}
             </option>
           {% endfor %}
         </select>
@@ -82,7 +81,9 @@
           {% unless current_variant.available %}disabled{% endunless %}
           value="{% if current_variant.available %}{{ 'kotohana.product.add_to_cart' | t }}{% else %}{{ 'kotohana.product.sold_out' | t }}{% endif %}"
         >
-        {{ form | payment_button }}
+        <div data-payment-button{% unless current_variant.available %} hidden{% endunless %}>
+          {{ form | payment_button }}
+        </div>
       {% endform %}
     </div>
 
@@ -144,9 +145,6 @@
   </div>
 </div>
 
-<script>
-  window.KotohanaVariants = {{ product.variants | json }};
-</script>
 <script src="{{ 'product-variants.js' | asset_url }}" defer></script>
 
 {% schema %}

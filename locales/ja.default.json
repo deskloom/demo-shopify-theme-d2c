@@ -94,11 +94,12 @@
       "add_to_cart": "カートに入れる",
       "howto_content": "デモ用の説明文です。実際の使い方は商品パッケージをご確認ください。",
       "ingredients_content": "デモ用の説明文です。特定原材料の記載は架空のサンプルです。",
-      "low_stock_html": "残り {{ count }} 点",
       "in_stock": "在庫あり",
       "quantity": "数量",
+      "variant": "種類",
       "shipping_content": "デモ用の説明文です。全国一律 550円、8,000円以上で送料無料の設定例です。",
       "sold_out": "売り切れ",
+      "sold_out_suffix": "（売り切れ）",
       "subscription_text": "お気に入りは定期便がお得です。回数の縛りなし・いつでも解約できます。",
       "subscription_title": "定期便のご案内",
       "thumbnails": "商品画像のサムネイル"
