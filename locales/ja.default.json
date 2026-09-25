@@ -1,0 +1,123 @@
+{
+  "404": {
+    "title": "404",
+    "not_found": "ページが見つかりません。",
+    "back_to_shopping": "買い物を続ける"
+  },
+  "blog": {
+    "article_comments": "コメント",
+    "article_metadata_html": "{{ date }} by {{ author }}",
+    "comment_form_body": "コメント",
+    "comment_form_email": "メールアドレス",
+    "comment_form_name": "お名前",
+    "comment_form_submit": "投稿する",
+    "comment_form_title": "コメントを書く"
+  },
+  "cart": {
+    "checkout": "レジへ進む",
+    "title": "カート",
+    "update": "更新する",
+    "remove": "削除する",
+    "empty": "カートは空です。",
+    "continue_shopping": "買い物を続ける",
+    "quantity": "数量",
+    "subtotal": "小計",
+    "free_remaining_html": "あと {{ amount }} で送料無料",
+    "free_achieved": "送料無料になりました"
+  },
+  "collection": {
+    "sort_title": "並び替え",
+    "sort_featured": "おすすめ順",
+    "sort_best_selling": "売れ筋順",
+    "sort_title_asc": "商品名 A-Z",
+    "sort_title_desc": "商品名 Z-A",
+    "sort_price_asc": "価格が安い順",
+    "sort_price_desc": "価格が高い順",
+    "sort_date_desc": "新着順",
+    "sort_date_asc": "古い順",
+    "empty": "このコレクションには商品がありません。",
+    "count_html": "{{ count }} 件の商品"
+  },
+  "collections": {
+    "title": "コレクション一覧"
+  },
+  "customers": {
+    "login": {
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "submit": "ログイン",
+      "title": "ログイン"
+    }
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Apple Wallet に追加",
+    "card": "ギフトカード",
+    "expired": "このギフトカードは有効期限切れです",
+    "expires_on": "{{ expires_on }} に有効期限切れ",
+    "use_at_checkout": "チェックアウトでこのギフトカードを使う"
+  },
+  "kotohana": {
+    "faq": {
+      "subtitle": "よくあるご質問にお答えします",
+      "title": "よくある質問"
+    },
+    "featured_collection": {
+      "subtitle": "リピート率の高い人気アイテム",
+      "title": "おすすめ商品",
+      "view_all": "すべて見る"
+    },
+    "features": {
+      "item_1_text": "架空の国内工房で丁寧に仕上げた設定のデモ用説明文です。",
+      "item_1_title": "国内工房の丁寧な仕上げ",
+      "item_2_text": "架空の認証・検査体制を想定したデモ用説明文です。",
+      "item_2_title": "毎日続けられるやさしさ",
+      "item_3_text": "架空の配送・梱包体制を想定したデモ用説明文です。",
+      "item_3_title": "環境に配慮した梱包",
+      "subtitle": "架空ブランド「ことはな」の約束",
+      "title": "3つのこだわり"
+    },
+    "hero": {
+      "badge": "架空D2Cブランド デモストア",
+      "cta": "商品を見る",
+      "subtitle": "架空の国産デイリーケアブランド「ことはな」。毎日の習慣に、ささやかな楽しみを。",
+      "title": "毎日に、花のような心地よさを"
+    },
+    "newsletter": {
+      "note": "登録はいつでも解除できます。",
+      "placeholder": "メールアドレス",
+      "submit": "登録する",
+      "subtitle": "新商品やお得な情報をお届けします",
+      "success": "ご登録ありがとうございます。",
+      "title": "ニュースレターに登録する"
+    },
+    "product": {
+      "add_to_cart": "カートに入れる",
+      "howto_content": "デモ用の説明文です。実際の使い方は商品パッケージをご確認ください。",
+      "ingredients_content": "デモ用の説明文です。特定原材料の記載は架空のサンプルです。",
+      "low_stock_html": "残り {{ count }} 点",
+      "in_stock": "在庫あり",
+      "quantity": "数量",
+      "shipping_content": "デモ用の説明文です。全国一律 550円、8,000円以上で送料無料の設定例です。",
+      "sold_out": "売り切れ",
+      "subscription_text": "お気に入りは定期便がお得です。回数の縛りなし・いつでも解約できます。",
+      "subscription_title": "定期便のご案内",
+      "thumbnails": "商品画像のサムネイル"
+    },
+    "testimonials": {
+      "subtitle": "ご利用いただいたお客さまの声",
+      "title": "お客様の声"
+    }
+  },
+  "password": {
+    "title": "このストアは公開準備中です",
+    "password": "パスワード",
+    "enter": "入る"
+  },
+  "search": {
+    "title": "検索",
+    "placeholder": "商品や記事を検索",
+    "submit": "検索する",
+    "no_results_html": "{{ terms }} の検索結果はありません",
+    "results_for_html": "{{ terms }} の検索結果 {{ count }} 件"
+  }
+}

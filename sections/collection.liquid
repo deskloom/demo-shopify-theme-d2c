@@ -1,0 +1,77 @@
+{% comment %} Collection section for KOTOHANA demo theme. {% endcomment %}
+
+<div class="kotohana-container">
+  <h1>{{ collection.title }}</h1>
+  <p>{{ 'collection.count_html' | t: count: collection.products_count }}</p>
+
+  {% if section.settings.show_sort %}
+    <form method="get" action="{{ collection.url }}">
+      <label for="sort-by-{{ section.id }}">{{ 'collection.sort_title' | t }}</label>
+      <select id="sort-by-{{ section.id }}" name="sort_by" onchange="this.form.submit()">
+        <option value="manual"{% if collection.sort_by == 'manual' %} selected="selected"{% endif %}>
+          {{ 'collection.sort_featured' | t }}
+        </option>
+        <option value="best-selling"{% if collection.sort_by == 'best-selling' %} selected="selected"{% endif %}>
+          {{ 'collection.sort_best_selling' | t }}
+        </option>
+        <option value="title-ascending"{% if collection.sort_by == 'title-ascending' %} selected="selected"{% endif %}>
+          {{ 'collection.sort_title_asc' | t }}
+        </option>
+        <option value="title-descending"{% if collection.sort_by == 'title-descending' %} selected="selected"{% endif %}>
+          {{ 'collection.sort_title_desc' | t }}
+        </option>
+        <option value="price-ascending"{% if collection.sort_by == 'price-ascending' %} selected="selected"{% endif %}>
+          {{ 'collection.sort_price_asc' | t }}
+        </option>
+        <option value="price-descending"{% if collection.sort_by == 'price-descending' %} selected="selected"{% endif %}>
+          {{ 'collection.sort_price_desc' | t }}
+        </option>
+        <option value="created-descending"{% if collection.sort_by == 'created-descending' %} selected="selected"{% endif %}>
+          {{ 'collection.sort_date_desc' | t }}
+        </option>
+        <option value="created-ascending"{% if collection.sort_by == 'created-ascending' %} selected="selected"{% endif %}>
+          {{ 'collection.sort_date_asc' | t }}
+        </option>
+      </select>
+    </form>
+  {% endif %}
+
+  <div class="kotohana-products">
+    {% paginate collection.products by 20 %}
+      {% for product in collection.products %}
+        <div class="kotohana-product-card">
+          {% if product.featured_image %}
+            {% render 'image',
+              class: 'collection-product__image',
+              image: product.featured_image,
+              url: product.url,
+              width: 400,
+              height: 400,
+              crop: 'center'
+            %}
+          {% endif %}
+          <div class="kotohana-product-card__body">
+            <p>{{ product.title | escape | link_to: product.url }}</p>
+            <p>{{ product.price | money }}</p>
+          </div>
+        </div>
+      {% endfor %}
+
+      {{ paginate | default_pagination }}
+    {% endpaginate %}
+  </div>
+
+  {% if collection.products_count == 0 %}
+    <p>{{ 'collection.empty' | t }}</p>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "t:general.collection",
+  "settings": [
+    { "type": "checkbox", "id": "show_sort", "label": "t:labels.show_sort", "default": true }
+  ],
+  "presets": [{ "name": "t:general.collection" }]
+}
+{% endschema %}

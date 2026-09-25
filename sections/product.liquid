@@ -1,0 +1,202 @@
+{% comment %} Product section for KOTOHANA demo theme. {% endcomment %}
+
+<div class="kotohana-container">
+  <div class="kotohana-product-layout">
+    <div class="kotohana-gallery">
+      {% if product.featured_image %}
+        <div class="kotohana-gallery__main">
+          <img
+            data-gallery-main
+            src="{{ product.featured_image | image_url: width: 1200 }}"
+            alt="{{ product.featured_image.alt | escape }}"
+            width="1200"
+            height="1200"
+          >
+        </div>
+        <div class="kotohana-gallery__thumbs" role="group" aria-label="{{ 'kotohana.product.thumbnails' | t }}">
+          {% for image in product.images %}
+            <button
+              type="button"
+              class="kotohana-gallery__thumb{% if forloop.first %} is-active{% endif %}"
+              data-gallery-thumb="{{ image | image_url: width: 1200 }}"
+              aria-label="{{ image.alt | escape }}"
+            >
+              {{ image | image_url: width: 200 | image_tag }}
+            </button>
+          {% endfor %}
+        </div>
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag }}
+      {% endif %}
+    </div>
+
+    <div class="kotohana-product-info">
+      <h1>{{ product.title }}</h1>
+      <p>{{ product.vendor }}</p>
+
+    <div
+      class="kotohana-product-form"
+      data-variant-form
+      data-variants="{{ product.variants | json | escape }}"
+      data-soldout-text="{{ 'kotohana.product.sold_out' | t }}"
+      data-instock-text="{{ 'kotohana.product.in_stock' | t }}"
+    >
+      {% form 'product', product %}
+        {% assign current_variant = product.selected_or_first_available_variant %}
+
+        <p data-variant-price>{{ current_variant.price | money }}</p>
+        <p data-variant-stock>
+          {% if current_variant.available %}
+            {{ 'kotohana.product.in_stock' | t }}
+          {% else %}
+            {{ 'kotohana.product.sold_out' | t }}
+          {% endif %}
+        </p>
+
+        <label for="variant-select-{{ section.id }}">{{ 'kotohana.product.quantity' | t }}</label>
+        <select name="id" id="variant-select-{{ section.id }}" data-variant-select>
+          {% for variant in product.variants %}
+            <option
+              value="{{ variant.id }}"
+              {% if variant.id == current_variant.id %}selected="selected"{% endif %}
+              {% unless variant.available %}disabled{% endunless %}
+            >
+              {{ variant.title }} - {{ variant.price | money }}
+            </option>
+          {% endfor %}
+        </select>
+
+        <label for="quantity-{{ section.id }}">{{ 'kotohana.product.quantity' | t }}</label>
+        <input
+          id="quantity-{{ section.id }}"
+          type="number"
+          name="quantity"
+          min="1"
+          value="1"
+        >
+
+        <input
+          type="submit"
+          data-add-button
+          data-default-label="{{ 'kotohana.product.add_to_cart' | t }}"
+          {% unless current_variant.available %}disabled{% endunless %}
+          value="{% if current_variant.available %}{{ 'kotohana.product.add_to_cart' | t }}{% else %}{{ 'kotohana.product.sold_out' | t }}{% endif %}"
+        >
+        {{ form | payment_button }}
+      {% endform %}
+    </div>
+
+      <div class="kotohana-product-blocks">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'ingredients' %}
+              <details class="kotohana-tab" {{ block.shopify_attributes }}>
+                <summary>{{ block.settings.title }}</summary>
+                <div>
+                  {% if block.settings.content != blank %}
+                    {{ block.settings.content }}
+                  {% else %}
+                    {{ 'kotohana.product.ingredients_content' | t }}
+                  {% endif %}
+                </div>
+              </details>
+            {% when 'howto' %}
+              <details class="kotohana-tab" {{ block.shopify_attributes }}>
+                <summary>{{ block.settings.title }}</summary>
+                <div>
+                  {% if block.settings.content != blank %}
+                    {{ block.settings.content }}
+                  {% else %}
+                    {{ 'kotohana.product.howto_content' | t }}
+                  {% endif %}
+                </div>
+              </details>
+            {% when 'shipping' %}
+              <details class="kotohana-tab" {{ block.shopify_attributes }}>
+                <summary>{{ block.settings.title }}</summary>
+                <div>
+                  {% if block.settings.content != blank %}
+                    {{ block.settings.content }}
+                  {% else %}
+                    {{ 'kotohana.product.shipping_content' | t }}
+                  {% endif %}
+                </div>
+              </details>
+            {% when 'subscription' %}
+              <div class="kotohana-card" {{ block.shopify_attributes }}>
+                <h3>{{ 'kotohana.product.subscription_title' | t }}</h3>
+                <p>{{ 'kotohana.product.subscription_text' | t }}</p>
+                {% if block.settings.content != blank %}
+                  <div>{{ block.settings.content }}</div>
+                {% endif %}
+              </div>
+            {% when 'text' %}
+              <div class="kotohana-card" {{ block.shopify_attributes }}>
+                {% if block.settings.title != blank %}
+                  <h3>{{ block.settings.title }}</h3>
+                {% endif %}
+                <div>{{ block.settings.content }}</div>
+              </div>
+          {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.KotohanaVariants = {{ product.variants | json }};
+</script>
+<script src="{{ 'product-variants.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "t:general.product",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "ingredients",
+      "name": "t:general.product_tab",
+      "settings": [
+        { "type": "text", "id": "title", "label": "t:labels.title", "default": "Ingredients" },
+        { "type": "richtext", "id": "content", "label": "t:labels.content" }
+      ]
+    },
+    {
+      "type": "howto",
+      "name": "t:general.product_tab",
+      "settings": [
+        { "type": "text", "id": "title", "label": "t:labels.title", "default": "How to use" },
+        { "type": "richtext", "id": "content", "label": "t:labels.content" }
+      ]
+    },
+    {
+      "type": "shipping",
+      "name": "t:general.product_tab",
+      "settings": [
+        { "type": "text", "id": "title", "label": "t:labels.title", "default": "Shipping" },
+        { "type": "richtext", "id": "content", "label": "t:labels.content" }
+      ]
+    },
+    {
+      "type": "subscription",
+      "name": "t:general.product_text",
+      "settings": [{ "type": "richtext", "id": "content", "label": "t:labels.content" }]
+    },
+    {
+      "type": "text",
+      "name": "t:general.text",
+      "settings": [
+        { "type": "text", "id": "title", "label": "t:labels.title" },
+        { "type": "richtext", "id": "content", "label": "t:labels.content" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.product",
+      "blocks": [{ "type": "ingredients" }, { "type": "howto" }, { "type": "shipping" }, { "type": "subscription" }]
+    }
+  ]
+}
+{% endschema %}

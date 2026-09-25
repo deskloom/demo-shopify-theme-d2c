@@ -1,0 +1,55 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "kotohana-hero",
+      "settings": {}
+    },
+    "features": {
+      "type": "kotohana-features",
+      "blocks": {
+        "feature-1": { "type": "feature", "settings": {} },
+        "feature-2": { "type": "feature", "settings": {} },
+        "feature-3": { "type": "feature", "settings": {} }
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3"],
+      "settings": {}
+    },
+    "featured-collection": {
+      "type": "kotohana-featured-collection",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "kotohana-testimonials",
+      "blocks": {
+        "t-1": { "type": "testimonial", "settings": {} },
+        "t-2": { "type": "testimonial", "settings": {} }
+      },
+      "block_order": ["t-1", "t-2"],
+      "settings": {}
+    },
+    "faq": {
+      "type": "kotohana-faq",
+      "blocks": {
+        "q-1": { "type": "faq_item", "settings": {} },
+        "q-2": { "type": "faq_item", "settings": {} },
+        "q-3": { "type": "faq_item", "settings": {} }
+      },
+      "block_order": ["q-1", "q-2", "q-3"],
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "kotohana-newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["hero", "features", "featured-collection", "testimonials", "faq", "newsletter"]
+}

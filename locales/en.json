@@ -1,0 +1,123 @@
+{
+  "404": {
+    "title": "404",
+    "not_found": "Page not found.",
+    "back_to_shopping": "Back to shopping"
+  },
+  "blog": {
+    "article_comments": "Comments",
+    "article_metadata_html": "{{ date }} by {{ author }}",
+    "comment_form_body": "Comment",
+    "comment_form_email": "Email",
+    "comment_form_name": "Name",
+    "comment_form_submit": "Post",
+    "comment_form_title": "Add a comment"
+  },
+  "cart": {
+    "checkout": "Checkout",
+    "title": "Cart",
+    "update": "Update",
+    "remove": "Remove",
+    "empty": "Your cart is empty.",
+    "continue_shopping": "Continue shopping",
+    "quantity": "Quantity",
+    "subtotal": "Subtotal",
+    "free_remaining_html": "Only {{ amount }} away from free shipping",
+    "free_achieved": "You have unlocked free shipping"
+  },
+  "collection": {
+    "sort_title": "Sort by",
+    "sort_featured": "Featured",
+    "sort_best_selling": "Best selling",
+    "sort_title_asc": "Title A-Z",
+    "sort_title_desc": "Title Z-A",
+    "sort_price_asc": "Price low to high",
+    "sort_price_desc": "Price high to low",
+    "sort_date_desc": "Newest",
+    "sort_date_asc": "Oldest",
+    "empty": "No products in this collection.",
+    "count_html": "{{ count }} products"
+  },
+  "collections": {
+    "title": "Collections"
+  },
+  "customers": {
+    "login": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "title": "Login"
+    }
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Add to Apple Wallet",
+    "card": "Gift card",
+    "expired": "This gift card has expired",
+    "expires_on": "Expires on {{ expires_on }}",
+    "use_at_checkout": "Use this gift card at checkout"
+  },
+  "kotohana": {
+    "faq": {
+      "subtitle": "Answers to frequently asked questions",
+      "title": "FAQ"
+    },
+    "featured_collection": {
+      "subtitle": "Our most reordered items",
+      "title": "Recommended products",
+      "view_all": "View all"
+    },
+    "features": {
+      "item_1_text": "Demo copy for a fictional domestic workshop finish.",
+      "item_1_title": "Careful domestic craftsmanship",
+      "item_2_text": "Demo copy for a fictional gentle daily formula.",
+      "item_2_title": "Gentle enough for every day",
+      "item_3_text": "Demo copy for fictional eco-friendly packaging.",
+      "item_3_title": "Eco-friendly packaging",
+      "subtitle": "Promises of fictional brand KOTOHANA",
+      "title": "Three commitments"
+    },
+    "hero": {
+      "badge": "Fictional D2C brand demo store",
+      "cta": "Shop products",
+      "subtitle": "Fictional daily-care brand KOTOHANA. Small joys for everyday rituals.",
+      "title": "Everyday comfort, like flowers"
+    },
+    "newsletter": {
+      "note": "You can unsubscribe at any time.",
+      "placeholder": "Email address",
+      "submit": "Subscribe",
+      "subtitle": "New arrivals and offers in your inbox",
+      "success": "Thank you for subscribing.",
+      "title": "Join our newsletter"
+    },
+    "product": {
+      "add_to_cart": "Add to cart",
+      "howto_content": "Demo copy. Please check the package for actual usage.",
+      "ingredients_content": "Demo copy. Ingredient listing is a fictional sample.",
+      "low_stock_html": "Only {{ count }} left",
+      "in_stock": "In stock",
+      "quantity": "Quantity",
+      "shipping_content": "Demo copy. Flat 550 yen shipping, free over 8,000 yen in this example.",
+      "sold_out": "Sold out",
+      "subscription_text": "Save with subscriptions. No commitment, cancel anytime.",
+      "subscription_title": "Subscription info",
+      "thumbnails": "Product image thumbnails"
+    },
+    "testimonials": {
+      "subtitle": "Reviews from our customers",
+      "title": "Customer reviews"
+    }
+  },
+  "password": {
+    "title": "This shop is private",
+    "password": "Password",
+    "enter": "Enter"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search articles, pages, or products",
+    "submit": "Search",
+    "no_results_html": "No results found for {{ terms }}",
+    "results_for_html": "{{ count }} results found for {{ terms }}"
+  }
+}

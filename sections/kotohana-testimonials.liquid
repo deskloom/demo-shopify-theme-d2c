@@ -1,0 +1,51 @@
+<div class="kotohana-container">
+  <h2 class="kotohana-section-title">
+    {% if section.settings.heading != blank %}
+      {{ section.settings.heading }}
+    {% else %}
+      {{ 'kotohana.testimonials.title' | t }}
+    {% endif %}
+  </h2>
+  <p class="kotohana-section-subtitle">
+    {% if section.settings.subheading != blank %}
+      {{ section.settings.subheading }}
+    {% else %}
+      {{ 'kotohana.testimonials.subtitle' | t }}
+    {% endif %}
+  </p>
+  <div class="kotohana-grid-3">
+    {% for block in section.blocks %}
+      <div class="kotohana-card" {{ block.shopify_attributes }}>
+        <p>{{ block.settings.quote }}</p>
+        <p>{{ block.settings.name }}{% if block.settings.role != blank %} ({{ block.settings.role }}){% endif %}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:general.testimonials",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "t:labels.heading" },
+    { "type": "text", "id": "subheading", "label": "t:labels.subheading" }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "t:general.testimonial",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "t:labels.quote" },
+        { "type": "text", "id": "name", "label": "t:labels.name" },
+        { "type": "text", "id": "role", "label": "t:labels.role" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.testimonials",
+      "blocks": [{ "type": "testimonial" }, { "type": "testimonial" }]
+    }
+  ]
+}
+{% endschema %}

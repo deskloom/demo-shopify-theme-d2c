@@ -1,0 +1,47 @@
+<div class="kotohana-container kotohana-newsletter">
+  <h2 class="kotohana-section-title">
+    {% if section.settings.heading != blank %}
+      {{ section.settings.heading }}
+    {% else %}
+      {{ 'kotohana.newsletter.title' | t }}
+    {% endif %}
+  </h2>
+  <p class="kotohana-section-subtitle">
+    {% if section.settings.subheading != blank %}
+      {{ section.settings.subheading }}
+    {% else %}
+      {{ 'kotohana.newsletter.subtitle' | t }}
+    {% endif %}
+  </p>
+  {% form 'customer', class: 'kotohana-newsletter__form' %}
+    {% if form.posted_successfully? %}
+      <p>{{ 'kotohana.newsletter.success' | t }}</p>
+    {% else %}
+      {% if form.errors %}
+        <p>{{ form.errors | default_errors }}</p>
+      {% endif %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <label for="newsletter-email-{{ section.id }}" style="display:none;">{{ 'kotohana.newsletter.placeholder' | t }}</label>
+      <input
+        id="newsletter-email-{{ section.id }}"
+        type="email"
+        name="contact[email]"
+        placeholder="{{ 'kotohana.newsletter.placeholder' | t }}"
+        required
+      >
+      <button type="submit">{{ 'kotohana.newsletter.submit' | t }}</button>
+      <p>{{ 'kotohana.newsletter.note' | t }}</p>
+    {% endif %}
+  {% endform %}
+</div>
+
+{% schema %}
+{
+  "name": "t:general.newsletter",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "t:labels.heading" },
+    { "type": "text", "id": "subheading", "label": "t:labels.subheading" }
+  ],
+  "presets": [{ "name": "t:general.newsletter" }]
+}
+{% endschema %}

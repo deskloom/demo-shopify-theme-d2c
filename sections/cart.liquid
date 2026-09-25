@@ -1,0 +1,66 @@
+{% comment %} Cart section for KOTOHANA demo theme. {% endcomment %}
+
+<div class="kotohana-container">
+  <h1>{{ 'cart.title' | t }}</h1>
+
+  {% if section.settings.show_free_bar %}
+    {% render 'free-shipping-bar' %}
+  {% endif %}
+
+  {% if cart.item_count > 0 %}
+    <form action="{{ routes.cart_url }}" method="post">
+      <table class="kotohana-cart-table">
+        <thead>
+          <tr>
+            <th>{{ 'cart.title' | t }}</th>
+            <th>{{ 'cart.quantity' | t }}</th>
+            <th>{{ 'cart.subtotal' | t }}</th>
+            <th>{{ 'cart.remove' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart.items %}
+            <tr>
+              <td>
+                {% render 'image', image: item.image, url: item.url %}
+                <p>{{ item.product.title }}</p>
+                <p>{{ item.variant.title }}</p>
+                <p>{{ item.price | money }}</p>
+              </td>
+              <td>
+                <label for="updates-{{ item.key }}" style="display:none;">{{ 'cart.quantity' | t }}</label>
+                <input
+                  id="updates-{{ item.key }}"
+                  type="number"
+                  name="updates[]"
+                  value="{{ item.quantity }}"
+                  min="0"
+                >
+                <input type="submit" value="{{ 'cart.update' | t }}">
+              </td>
+              <td>{{ item.line_price | money }}</td>
+              <td>{{ 'cart.remove' | t | link_to: item.url_to_remove }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <p>{{ 'cart.subtotal' | t }}: {{ cart.total_price | money }}</p>
+
+      <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
+    </form>
+  {% else %}
+    <p>{{ 'cart.empty' | t }}</p>
+    <p><a href="{{ routes.all_products_collection_url }}">{{ 'cart.continue_shopping' | t }}</a></p>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "t:general.cart",
+  "settings": [
+    { "type": "checkbox", "id": "show_free_bar", "label": "t:labels.show_free_bar", "default": true }
+  ],
+  "presets": [{ "name": "t:general.cart" }]
+}
+{% endschema %}

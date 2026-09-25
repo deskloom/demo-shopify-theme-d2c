@@ -1,0 +1,10 @@
+Handle,Title,Body (HTML),Vendor,Type,Tags,Published,Option1 Name,Option1 Value,Variant SKU,Variant Price,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Image Src,Status
+kotohana-soap,"KOTOHANA Soap (Fictional)","<p>Fictional daily soap for demo.</p>",KOTOHANA,Soap,demo_skincare,TRUE,,,KOTO-SOAP-001,2200,50,deny,manual,,active
+kotohana-lotion,"KOTOHANA Lotion (Fictional)","<p>Fictional lotion with variant sizes.</p>",KOTOHANA,Lotion,"demo_skincare,bestseller",TRUE,Size,100mL,KOTO-LOT-100,3300,20,deny,manual,,active
+kotohana-lotion,"KOTOHANA Lotion (Fictional)","<p>Fictional lotion with variant sizes.</p>",KOTOHANA,Lotion,"demo_skincare,bestseller",TRUE,Size,200mL,KOTO-LOT-200,4950,0,deny,manual,,active
+kotohana-cream,"KOTOHANA Cream (Fictional)","<p>Fictional cream, out of stock variant included.</p>",KOTOHANA,Cream,demo_skincare,TRUE,Size,30g,KOTO-CRM-30,3850,0,deny,manual,,active
+kotohana-cream,"KOTOHANA Cream (Fictional)","<p>Fictional cream, out of stock variant included.</p>",KOTOHANA,Cream,demo_skincare,TRUE,Size,50g,KOTO-CRM-50,5500,15,deny,manual,,active
+kotohana-tea,"KOTOHANA Tea (Fictional)","<p>Fictional herbal tea for demo.</p>",KOTOHANA,Food,demo_food,TRUE,,,KOTO-TEA-001,1650,100,deny,manual,,active
+kotohana-granola,"KOTOHANA Granola (Fictional)","<p>Fictional granola for demo.</p>",KOTOHANA,Food,demo_food,TRUE,,,KOTO-GRA-001,1980,80,deny,manual,,active
+kotohana-oil,"KOTOHANA Oil (Fictional)","<p>Fictional body oil for demo.</p>",KOTOHANA,Oil,demo_skincare,TRUE,,,KOTO-OIL-001,4400,30,deny,manual,,active
+kotohana-mist,"KOTOHANA Mist (Fictional)","<p>Fictional mist, zero stock demo.</p>",KOTOHANA,Mist,demo_skincare,TRUE,,,KOTO-MST-001,2750,0,deny,manual,,active

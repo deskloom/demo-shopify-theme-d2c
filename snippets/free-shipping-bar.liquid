@@ -1,0 +1,36 @@
+{% doc %}
+  Renders free shipping progress bar.
+
+  @param {number} cart_total - cart.total_price in cents
+{% enddoc %}
+{% liquid
+  assign threshold_yen = settings.free_shipping_threshold | default: 8000
+  assign threshold_cents = threshold_yen | times: 100
+  assign cart_cents = cart_total | default: cart.total_price | default: 0
+  assign remaining_cents = threshold_cents | minus: cart_cents
+  if remaining_cents < 0
+    assign remaining_cents = 0
+  endif
+  assign remaining_money = remaining_cents | money
+%}
+<div
+  class="kotohana-free-bar"
+  data-free-bar
+  data-cart-total="{{ cart_cents }}"
+  data-threshold="{{ threshold_cents }}"
+>
+  <p data-free-message
+    data-achieved-text="{{ 'cart.free_achieved' | t }}"
+    data-remaining-template="{{ 'cart.free_remaining_html' | t }}"
+  >
+    {% if cart_cents >= threshold_cents %}
+      {{ 'cart.free_achieved' | t }}
+    {% else %}
+      {{ 'cart.free_remaining_html' | t: amount: remaining_money }}
+    {% endif %}
+  </p>
+  <div class="kotohana-free-bar__track" aria-hidden="true">
+    <div class="kotohana-free-bar__fill" data-free-fill></div>
+  </div>
+</div>
+<script src="{{ 'free-shipping.js' | asset_url }}" defer></script>
