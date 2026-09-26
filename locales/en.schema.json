@@ -58,6 +58,7 @@
     "customer_account_menu": "Customer account menu",
     "foreground": "Foreground",
     "free_shipping_threshold": "Free shipping threshold",
+    "free_shipping_threshold_info": "Yen, tax included. Falls back to 8,000 yen when empty or 0 or less",
     "grid_gap": "Grid spacing",
     "grid_item_width": "Grid item width",
     "heading": "Heading",
@@ -84,6 +85,13 @@
     "text_style": "Text style",
     "text": "Text",
     "title": "Title"
+  },
+  "blocks": {
+    "ingredients": "Ingredients",
+    "usage": "How to use",
+    "shipping": "Shipping and returns",
+    "subscription": "Subscription info",
+    "product_text": "Product text"
   },
   "options": {
     "alignment": {

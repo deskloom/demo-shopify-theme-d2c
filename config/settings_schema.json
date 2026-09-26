@@ -84,13 +84,10 @@
     "name": "t:general.cart",
     "settings": [
       {
-        "type": "range",
+        "type": "number",
         "id": "free_shipping_threshold",
         "label": "t:labels.free_shipping_threshold",
-        "min": 0,
-        "max": 50000,
-        "step": 500,
-        "unit": "JPY",
+        "info": "t:labels.free_shipping_threshold_info",
         "default": 8000
       }
     ]

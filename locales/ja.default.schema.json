@@ -58,6 +58,7 @@
     "customer_account_menu": "アカウントメニュー",
     "foreground": "文字色",
     "free_shipping_threshold": "送料無料の基準額",
+    "free_shipping_threshold_info": "円・税込。空または0以下のときは8,000円になります",
     "grid_gap": "グリッド間隔",
     "grid_item_width": "グリッド幅",
     "heading": "見出し",
@@ -84,6 +85,13 @@
     "text_style": "文字スタイル",
     "text": "テキスト",
     "title": "タイトル"
+  },
+  "blocks": {
+    "ingredients": "成分・原材料",
+    "usage": "使い方",
+    "shipping": "配送・返品",
+    "subscription": "定期便の案内",
+    "product_text": "商品テキスト"
   },
   "options": {
     "alignment": {

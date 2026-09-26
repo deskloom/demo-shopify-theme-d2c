@@ -5,6 +5,13 @@
 {% enddoc %}
 {% liquid
   assign threshold_yen = settings.free_shipping_threshold | default: 8000
+  if threshold_yen == blank
+    assign threshold_yen = 8000
+  endif
+  assign threshold_yen = threshold_yen | plus: 0
+  if threshold_yen <= 0
+    assign threshold_yen = 8000
+  endif
   assign threshold_cents = threshold_yen | times: 100
   assign cart_cents = cart_total | default: cart.total_price | default: 0
   assign remaining_cents = threshold_cents | minus: cart_cents
