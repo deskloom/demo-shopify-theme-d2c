@@ -26,7 +26,7 @@ Shopify skeleton-theme をベースに作成しています。
 
 - Online Store 2.0 形式（JSONテンプレート＋セクション＋ブロック）。追加した全セクションに `{% schema %}` と `presets` を付け、テーマエディタから追加可能
 - 多言語: `locales/ja.default.json` を既定、`locales/en.json` を追加。テンプレート内の固定文言はすべて `{{ 'key' | t }}` で出力し、直書きなし。セクションの schema 表示名は `t:` 形式で `ja.default.schema.json` / `en.schema.json` に用意
-- レスポンシブ: モバイルファーストの `assets/kotohana.css`。スマホ幅を想定したCSS（`minmax(0,1fr)`・折り返し）で作成。実機表示は開発ストアで確認予定
+- レスポンシブ: モバイルファーストの `assets/kotohana.css`（`minmax(0,1fr)`・折り返し）。スマホ幅ではカートを1商品1カードの縦並びに切り替え。開発ストアで 375px / 1280px の表示を確認済み（下記「開発ストアで確認したこと」）
 - 画像は外部URLを使わず `placeholder_svg_tag` で代用。ブランド名・商品名はすべて架空
 - JSの純粋関数（残額計算・バリエーション状態）を `assets/` に置き、Node の単体テストから `require` して検証
 
@@ -78,29 +78,42 @@ shopify theme dev --store <ストア名>
 ```
 
 1. ストアの通貨をJPY、既定言語を日本語にする
-2. 管理画面の「商品管理」から `sample-data/products.csv` を商品インポート（CSVを取り込む）
+2. 管理画面の「商品管理」から `sample-data/products.csv` を商品インポート（CSVを取り込む）。取り込みで在庫数が反映されない場合は、売り切れを確認したいバリエーション（例: Lotion 200mL）を管理画面で「在庫を追跡する」オン・数量0にする
 3. コレクションを作成し、おすすめ商品を集める（トップの「おすすめ商品」セクションで指定。未指定時は `collections.all` の最大4件、それも0件ならプレースホルダー4枚を表示）
 4. テーマエディタでトップページ各セクション・商品ページブロック・送料無料基準額（既定8,000）を確認
 
+## 開発ストアで確認したこと
+
+Shopify の開発ストア（通貨JPY・既定言語 日本語）にテーマを非公開でアップロードし、サンプル商品を取り込んで確認しました。
+
+- アップロード時のエラーなし（`theme check` では出ずアップロードで初めて出たエラー〔ブロック名の重複・range設定の上限〕は修正し、同じ種類をテストで検出するようにした）
+- トップ・商品・コレクション・カートの4画面で、375px / 1280px とも横スクロールなし（`scrollWidth === clientWidth` を計測）
+- 送料無料バー: カートに ¥3,850 の商品を入れると「あと ¥4,150 で送料無料」（Liquid の初回表示と JS の再描画で同じ表示）
+- 在庫0のバリエーション（Lotion 200mL）を選ぶと、価格 ¥4,950・「売り切れ」表示・カートボタン無効・動的決済ボタン非表示に切り替わる
+- 画像の無い商品をカートに入れてもエラーにならず、プレースホルダーを表示
+
 ## 画面写真
 
-`docs/screenshots/` に置く予定の画像（画像はこちらで撮影して追加するため、ファイルは作らない）:
+| トップ（PC） | トップ（スマホ） |
+|---|---|
+| ![](docs/screenshots/home-pc.png) | ![](docs/screenshots/home-sp.png) |
 
-- home-pc.png（トップページ・PC 1280px）
-- home-sp.png（トップページ・スマホ 375px）
-- product-pc.png（商品ページ・PC 1280px）
-- product-sp.png（商品ページ・スマホ 375px）
-- product-soldout-sp.png（売り切れ表示・スマホ 375px）
-- collection-sp.png（コレクションページ・スマホ 375px）
-- cart-sp.png（カートページ・スマホ 375px・カードレイアウト）
+| 商品ページ（PC） | 商品ページ（スマホ） | 売り切れ選択時（スマホ） |
+|---|---|---|
+| ![](docs/screenshots/product-pc.png) | ![](docs/screenshots/product-sp.png) | ![](docs/screenshots/product-soldout-sp.png) |
+
+| コレクション（スマホ） | カート（スマホ） |
+|---|---|
+| ![](docs/screenshots/collection-sp.png) | ![](docs/screenshots/cart-sp.png) |
 
 ## ベーステーマの出典とライセンス
 
 - ベース: [Shopify skeleton-theme](https://github.com/Shopify/skeleton-theme)（`LICENSE.md` は原文のまま残しています）
-- ライセンス: MIT（`LICENSE.md` を参照）
+- ライセンス: Shopify skeleton-theme のライセンス（MIT形式で、Shopify と連携するテーマの開発に限って利用可能という条件付き。`LICENSE.md` を参照）
 
 ## できていないこと
 
 - 実決済・配送業者連携・税設定は開発ストア側の設定が必要で、このテーマには含みません
-- 商品画像はプレースホルダー表示のみで、実画像は含みません
+- 商品画像はプレースホルダー表示のみで、実画像は含みません（画面写真のバッグ等のイラストは Shopify 標準のプレースホルダー）
+- 商品名は架空であることが分かるよう英語表記＋「(Fictional)」にしています
 - 定期便の申込処理自体はダミー案内のみで、サブスクアプリ連携はしていません
