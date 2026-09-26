@@ -12,9 +12,27 @@
     "main": {
       "type": "product",
       "blocks": {
-        "ingredients": { "type": "ingredients", "settings": {} },
-        "howto": { "type": "howto", "settings": {} },
-        "shipping": { "type": "shipping", "settings": {} },
+        "ingredients": {
+          "type": "ingredients",
+          "settings": {
+            "title": "成分・原材料",
+            "content": "<p>架空のサンプルです。主な成分としてシアバター・ホホバ種子油・カモミール花エキスを配合しています（いずれも保湿成分としての設定例です）。</p>"
+          }
+        },
+        "howto": {
+          "type": "howto",
+          "settings": {
+            "title": "使い方",
+            "content": "<p>適量（目安：さくらんぼ大）を手に取り、朝晩の洗顔後の肌になじませてください。</p>"
+          }
+        },
+        "shipping": {
+          "type": "shipping",
+          "settings": {
+            "title": "配送・返品について",
+            "content": "<p>全国一律550円、8,000円以上で送料無料です。未開封に限り到着後14日以内は返品を受け付けます。</p>"
+          }
+        },
         "subscription": { "type": "subscription", "settings": {} }
       },
       "block_order": ["ingredients", "howto", "shipping", "subscription"],

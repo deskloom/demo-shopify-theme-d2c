@@ -16,6 +16,7 @@
   "cart": {
     "checkout": "Checkout",
     "title": "Cart",
+    "product": "Product",
     "update": "Update",
     "remove": "Remove",
     "empty": "Your cart is empty.",

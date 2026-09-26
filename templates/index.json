@@ -16,9 +16,27 @@
     "features": {
       "type": "kotohana-features",
       "blocks": {
-        "feature-1": { "type": "feature", "settings": {} },
-        "feature-2": { "type": "feature", "settings": {} },
-        "feature-3": { "type": "feature", "settings": {} }
+        "feature-1": {
+          "type": "feature",
+          "settings": {
+            "title": "国内工房の丁寧な仕上げ",
+            "text": "架空の国内工房で一つひとつ丁寧に仕上げています。毎日の肌にやさしい使い心地を目指しました。"
+          }
+        },
+        "feature-2": {
+          "type": "feature",
+          "settings": {
+            "title": "毎日続けられるやさしさ",
+            "text": "香りや刺激に配慮した架空の処方で、朝晩の習慣に取り入れやすい使用感です。"
+          }
+        },
+        "feature-3": {
+          "type": "feature",
+          "settings": {
+            "title": "環境に配慮した梱包",
+            "text": "過剰な包装を省いた架空のエコ梱包でお届けします。段ボールはリサイクル素材を使っています。"
+          }
+        }
       },
       "block_order": ["feature-1", "feature-2", "feature-3"],
       "settings": {}
@@ -30,8 +48,22 @@
     "testimonials": {
       "type": "kotohana-testimonials",
       "blocks": {
-        "t-1": { "type": "testimonial", "settings": {} },
-        "t-2": { "type": "testimonial", "settings": {} }
+        "t-1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "泡立ちがきめ細かく、洗い上がりがつっぱりません。香りも穏やかで続けやすいです。",
+            "name": "30代・会社員",
+            "role": "リピーター"
+          }
+        },
+        "t-2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "定期便で買い忘れがなくなりました。梱包が簡素でゴミが少ないのも気に入っています。",
+            "name": "40代・自営業",
+            "role": "定期便利用中"
+          }
+        }
       },
       "block_order": ["t-1", "t-2"],
       "settings": {}
@@ -39,9 +71,27 @@
     "faq": {
       "type": "kotohana-faq",
       "blocks": {
-        "q-1": { "type": "faq_item", "settings": {} },
-        "q-2": { "type": "faq_item", "settings": {} },
-        "q-3": { "type": "faq_item", "settings": {} }
+        "q-1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "定期便に回数の縛りはありますか？",
+            "answer": "<p>回数の縛りはありません。いつでも解約できます。</p>"
+          }
+        },
+        "q-2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "送料はいくらですか？",
+            "answer": "<p>全国一律550円です。8,000円以上のご注文で送料無料になります。</p>"
+          }
+        },
+        "q-3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "返品はできますか？",
+            "answer": "<p>未開封に限り、到着後14日以内であれば返品を受け付けます。</p>"
+          }
+        }
       },
       "block_order": ["q-1", "q-2", "q-3"],
       "settings": {}

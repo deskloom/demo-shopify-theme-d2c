@@ -41,7 +41,7 @@ describe('products.csv', () => {
     const file = path.join(ROOT, 'sample-data', 'products.csv');
     assert.ok(fs.existsSync(file), 'sample-data/products.csv must exist');
     const { headers, rows } = parseCsv(fs.readFileSync(file, 'utf8'));
-    const required = ['Handle', 'Title', 'Body (HTML)', 'Vendor', 'Type', 'Tags', 'Published', 'Option1 Name', 'Option1 Value', 'Variant SKU', 'Variant Price', 'Variant Inventory Qty', 'Variant Inventory Policy', 'Variant Fulfillment Service', 'Image Src', 'Status'];
+    const required = ['Handle', 'Title', 'Body (HTML)', 'Vendor', 'Type', 'Tags', 'Published', 'Option1 Name', 'Option1 Value', 'Variant SKU', 'Variant Price', 'Variant Inventory Qty', 'Variant Inventory Policy', 'Variant Inventory Tracker', 'Variant Fulfillment Service', 'Image Src', 'Status'];
     for (const h of required) assert.ok(headers.includes(h), 'missing header: ' + h);
     const idx = (n) => headers.indexOf(n);
     const handles = new Set(rows.map((r) => r[idx('Handle')]));
@@ -59,6 +59,7 @@ describe('products.csv', () => {
     for (const r of rows) {
       assert.ok(Number(r[idx('Variant Price')]) > 0, 'variant price must be positive: ' + r[idx('Variant SKU')]);
       assert.ok(r[idx('Status')] === 'active', 'status should be active');
+      assert.equal(r[idx('Variant Inventory Tracker')], 'shopify', 'Variant Inventory Tracker must be shopify: ' + r[idx('Variant SKU')]);
     }
   });
 });

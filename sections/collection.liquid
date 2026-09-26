@@ -40,7 +40,7 @@
     {% paginate collection.products by 20 %}
       {% for product in collection.products %}
         <div class="kotohana-product-card">
-          {% if product.featured_image %}
+          {% if product.featured_image != blank %}
             {% render 'image',
               class: 'collection-product__image',
               image: product.featured_image,
@@ -49,6 +49,8 @@
               height: 400,
               crop: 'center'
             %}
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag }}
           {% endif %}
           <div class="kotohana-product-card__body">
             <p>{{ product.title | escape | link_to: product.url }}</p>

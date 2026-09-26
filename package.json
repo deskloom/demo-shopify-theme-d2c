@@ -4,7 +4,7 @@
   "private": true,
   "description": "KOTOHANA fictional D2C demo theme based on Shopify skeleton-theme",
   "scripts": {
-    "test": "node --test tests/templates.test.js tests/locales.test.js tests/products-csv.test.js tests/free-shipping.test.js tests/product-variants.test.js tests/schema-rules.test.js"
+    "test": "node --test tests/templates.test.js tests/locales.test.js tests/products-csv.test.js tests/free-shipping.test.js tests/product-variants.test.js tests/schema-rules.test.js tests/image-fallback.test.js tests/index-content.test.js"
   },
   "devDependencies": {
     "@shopify/cli": "^3.0.0"

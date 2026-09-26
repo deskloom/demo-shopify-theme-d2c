@@ -16,6 +16,7 @@
   "cart": {
     "checkout": "レジへ進む",
     "title": "カート",
+    "product": "商品",
     "update": "更新する",
     "remove": "削除する",
     "empty": "カートは空です。",

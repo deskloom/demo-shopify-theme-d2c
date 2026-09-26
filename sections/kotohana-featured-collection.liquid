@@ -13,13 +13,21 @@
       {{ 'kotohana.featured_collection.subtitle' | t }}
     {% endif %}
   </p>
+  {% assign products_to_show = section.settings.products_to_show | default: 4 %}
   {% assign target_collection = collections[section.settings.collection] %}
-  {% if target_collection %}
+  {% if target_collection and target_collection.products.size > 0 %}
+    {% assign display_products = target_collection.products %}
+    {% assign display_collection = target_collection %}
+  {% elsif collections.all and collections.all.products.size > 0 %}
+    {% assign display_products = collections.all.products %}
+    {% assign display_collection = collections.all %}
+  {% endif %}
+  {% if display_products and display_products.size > 0 %}
     <div class="kotohana-products">
-      {% for product in target_collection.products limit: section.settings.products_to_show %}
+      {% for product in display_products limit: products_to_show %}
         <div class="kotohana-product-card">
           <a href="{{ product.url }}">
-            {% if product.featured_image %}
+            {% if product.featured_image != blank %}
               {{ product.featured_image | image_url: width: 600 | image_tag }}
             {% else %}
               {{ 'product-1' | placeholder_svg_tag }}
@@ -37,7 +45,18 @@
         </div>
       {% endfor %}
     </div>
-    <p><a href="{{ target_collection.url }}">{{ 'kotohana.featured_collection.view_all' | t }}</a></p>
+    <p><a href="{{ display_collection.url }}">{{ 'kotohana.featured_collection.view_all' | t }}</a></p>
+  {% else %}
+    <div class="kotohana-products">
+      {% for i in (1..4) %}
+        <div class="kotohana-product-card">
+          {{ 'product-1' | placeholder_svg_tag }}
+          <div class="kotohana-product-card__body">
+            <p><a href="{{ routes.all_products_collection_url }}">{{ 'kotohana.featured_collection.view_all' | t }}</a></p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
   {% endif %}
 </div>
 

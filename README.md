@@ -53,19 +53,21 @@ npm test
 npx shopify theme check
 ```
 
-- `npm test`: `node --test` で52件のテストを実行（テンプレート参照・翻訳キー・日本語直書き禁止・英語直書き禁止・schema presets・CSV・残額計算・金額整形・バリエーション切替・決済ボタン表示切替・low_stockキー削除・死んだコード削除・ブロック名一意・range制約）
+- `npm test`: `node --test` で57件のテストを実行（テンプレート参照・翻訳キー・日本語直書き禁止・英語直書き禁止・schema presets・CSV・残額計算・金額整形・バリエーション切替・決済ボタン表示切替・low_stockキー削除・死んだコード削除・ブロック名一意・range制約・画像フォールバック・index文言）
 - `npx shopify theme check`: エラー0・警告0を確認済み（48 files inspected with no offenses found）
 
 ## テスト
 
 - 全 `templates/*.json` が参照するセクションが `sections/` に実在すること、ブロック型の整合性を確認
 - 全 Liquid の `'key' | t` が `ja.default.json` と `en.json` の両方に存在すること、両言語のキー集合が一致することを確認
-- sections/snippets/blocks/templates/layout の Liquid（schema・stylesheet・script・title除く）と templates JSON に日本語直書きがないことを確認
+- sections/snippets/blocks/layout の Liquid（schema・stylesheet・script・title除く）に日本語直書きがないことを確認（templates/*.json の settings 値は日本語既定値として許容）
+- 画像フォールバック: `snippets/image.liquid` が `blank` 時に `placeholder_svg_tag` を出すこと、全Liquidの `image_url`/`image_tag` 使用箇所に分岐があること、コレクショングリッドにプレースホルダーがあることを確認
+- `templates/index.json` の全ブロックのテキスト設定が空でないこと、features/testimonials/faq の presets に既定文言が入っていることを確認
 - schema外のLiquidのHTML地の文に英語直書き（タグ間に英単語2語以上）がないことを確認
 - 各セクション・ブロックの schema が正しいJSONで `presets` を持つことを確認。`low_stock_html` が ja/en ともに存在しないこと、`sections/product.liquid` に `window.KotohanaVariants` が残っていないことも確認
 - 全 `sections/*.liquid` の schema でブロックの `name` がセクション内で一意であること（`sections/product.liquid` の重複を `t:blocks.*` に分離して解消）を確認
 - 全 schema（sections/blocks/config/settings_schema.json）の `type: "range"` 設定が `max < 10000`・`min < max`・`(max-min)/step <= 101`・`default` が範囲内で step に乗っていること、`free_shipping_threshold` が range 型でないこと（数値型に変更）を確認
-- `products.csv` の必須ヘッダー・6商品以上・バリエーション付き商品・在庫0バリエーションを確認
+- `products.csv` の必須ヘッダー（`Variant Inventory Tracker` を含む）・6商品以上・バリエーション付き商品・在庫0バリエーション・全行 `Variant Inventory Tracker=shopify` を確認
 - 送料無料バーの残額計算（基準額未満／ちょうど／超過）と金額整形（`buildFreeShippingMessage('あと __AMOUNT__ で送料無料', 300000)` → `'あと ¥3,000 で送料無料'`）、バリエーション切替JS（在庫切れでボタン無効・価格切替・決済ボタン非表示）を確認
 - 破壊テスト確認: `locales/en.json` から `cart.free_achieved` を1キー削除すると `locales` テストが失敗する（missing locale keys）ことを実際に確認し、確認後に元に戻した。英語直書きの探知も、わざと `snippets/__probe.liquid` に英文を入れて失敗することを確認後に削除した
 
@@ -75,9 +77,22 @@ npx shopify theme check
 shopify theme dev --store <ストア名>
 ```
 
-1. 管理画面の「商品管理」から `sample-data/products.csv` を商品インポート
-2. コレクションを作成し、おすすめ商品を集める（トップの「おすすめ商品」セクションで指定）
-3. テーマエディタでトップページ各セクション・商品ページブロック・送料無料基準額（既定8,000）を確認
+1. ストアの通貨をJPY、既定言語を日本語にする
+2. 管理画面の「商品管理」から `sample-data/products.csv` を商品インポート（CSVを取り込む）
+3. コレクションを作成し、おすすめ商品を集める（トップの「おすすめ商品」セクションで指定。未指定時は `collections.all` の最大4件、それも0件ならプレースホルダー4枚を表示）
+4. テーマエディタでトップページ各セクション・商品ページブロック・送料無料基準額（既定8,000）を確認
+
+## 画面写真
+
+`docs/screenshots/` に置く予定の画像（画像はこちらで撮影して追加するため、ファイルは作らない）:
+
+- home-pc.png（トップページ・PC 1280px）
+- home-sp.png（トップページ・スマホ 375px）
+- product-pc.png（商品ページ・PC 1280px）
+- product-sp.png（商品ページ・スマホ 375px）
+- product-soldout-sp.png（売り切れ表示・スマホ 375px）
+- collection-sp.png（コレクションページ・スマホ 375px）
+- cart-sp.png（カートページ・スマホ 375px・カードレイアウト）
 
 ## ベーステーマの出典とライセンス
 

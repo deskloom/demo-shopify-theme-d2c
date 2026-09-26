@@ -76,6 +76,7 @@
 
         <input
           type="submit"
+          class="kotohana-btn kotohana-btn--primary"
           data-add-button
           data-default-label="{{ 'kotohana.product.add_to_cart' | t }}"
           {% unless current_variant.available %}disabled{% endunless %}
@@ -156,7 +157,7 @@
       "type": "ingredients",
       "name": "t:blocks.ingredients",
       "settings": [
-        { "type": "text", "id": "title", "label": "t:labels.title", "default": "Ingredients" },
+        { "type": "text", "id": "title", "label": "t:labels.title", "default": "成分・原材料" },
         { "type": "richtext", "id": "content", "label": "t:labels.content" }
       ]
     },
@@ -164,7 +165,7 @@
       "type": "howto",
       "name": "t:blocks.usage",
       "settings": [
-        { "type": "text", "id": "title", "label": "t:labels.title", "default": "How to use" },
+        { "type": "text", "id": "title", "label": "t:labels.title", "default": "使い方" },
         { "type": "richtext", "id": "content", "label": "t:labels.content" }
       ]
     },
@@ -172,7 +173,7 @@
       "type": "shipping",
       "name": "t:blocks.shipping",
       "settings": [
-        { "type": "text", "id": "title", "label": "t:labels.title", "default": "Shipping" },
+        { "type": "text", "id": "title", "label": "t:labels.title", "default": "配送・返品について" },
         { "type": "richtext", "id": "content", "label": "t:labels.content" }
       ]
     },

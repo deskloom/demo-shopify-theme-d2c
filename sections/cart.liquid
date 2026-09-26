@@ -12,7 +12,7 @@
       <table class="kotohana-cart-table">
         <thead>
           <tr>
-            <th>{{ 'cart.title' | t }}</th>
+            <th>{{ 'cart.product' | t }}</th>
             <th>{{ 'cart.quantity' | t }}</th>
             <th>{{ 'cart.subtotal' | t }}</th>
             <th>{{ 'cart.remove' | t }}</th>
@@ -20,14 +20,14 @@
         </thead>
         <tbody>
           {% for item in cart.items %}
-            <tr>
-              <td>
+            <tr class="kotohana-cart-row">
+              <td class="kotohana-cart-cell kotohana-cart-cell--product">
                 {% render 'image', image: item.image, url: item.url %}
                 <p>{{ item.product.title }}</p>
                 <p>{{ item.variant.title }}</p>
                 <p>{{ item.price | money }}</p>
               </td>
-              <td>
+              <td class="kotohana-cart-cell kotohana-cart-cell--qty">
                 <label for="updates-{{ item.key }}" style="display:none;">{{ 'cart.quantity' | t }}</label>
                 <input
                   id="updates-{{ item.key }}"
@@ -36,10 +36,10 @@
                   value="{{ item.quantity }}"
                   min="0"
                 >
-                <input type="submit" value="{{ 'cart.update' | t }}">
+                <input type="submit" class="kotohana-btn kotohana-btn--secondary" value="{{ 'cart.update' | t }}">
               </td>
-              <td>{{ item.line_price | money }}</td>
-              <td>{{ 'cart.remove' | t | link_to: item.url_to_remove }}</td>
+              <td class="kotohana-cart-cell kotohana-cart-cell--line">{{ item.line_price | money }}</td>
+              <td class="kotohana-cart-cell kotohana-cart-cell--remove">{{ 'cart.remove' | t | link_to: item.url_to_remove }}</td>
             </tr>
           {% endfor %}
         </tbody>
@@ -47,7 +47,7 @@
 
       <p>{{ 'cart.subtotal' | t }}: {{ cart.total_price | money }}</p>
 
-      <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
+      <input type="submit" name="checkout" class="kotohana-btn kotohana-btn--primary" value="{{ 'cart.checkout' | t }}">
     </form>
   {% else %}
     <p>{{ 'cart.empty' | t }}</p>
