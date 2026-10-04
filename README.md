@@ -41,7 +41,7 @@ locales/          # ja.default.json / en.json / ja.default.schema.json / en.sche
 sample-data/      # products.csv（商品CSVインポート用サンプル）
 sections/         # kotohana-* 6件 + product / cart / collection / collections / header / footer / page / password / search / article / blog / 404
 snippets/         # free-shipping-bar.liquid / image.liquid / meta-tags.liquid / css-variables.liquid
-templates/        # index / product / cart / collection 他（password.liquid を含む）
+templates/        # index / product / cart / collection 他（gift_card.liquid を含む）
 tests/            # node:test による自動テスト
 ```
 
@@ -53,7 +53,7 @@ npm test
 npx shopify theme check
 ```
 
-- `npm test`: `node --test` で57件のテストを実行（テンプレート参照・翻訳キー・日本語直書き禁止・英語直書き禁止・schema presets・CSV・残額計算・金額整形・バリエーション切替・決済ボタン表示切替・low_stockキー削除・死んだコード削除・ブロック名一意・range制約・画像フォールバック・index文言）
+- `npm test`: `node --test` で63件のテストを実行（テンプレート参照・翻訳キー・日本語直書き禁止・英語直書き禁止・schema presets・CSV・残額計算・金額整形・バリエーション切替・決済ボタン表示切替・low_stockキー削除・死んだコード削除・ブロック名一意・range制約・画像フォールバック・index文言・ストアフロント修正の静的検査）
 - `npx shopify theme check`: エラー0・警告0を確認済み（48 files inspected with no offenses found）
 
 ## テスト
@@ -105,6 +105,8 @@ Shopify の開発ストア（通貨JPY・既定言語 日本語）にテーマ�
 | コレクション（スマホ） | カート（スマホ） |
 |---|---|
 | ![](docs/screenshots/collection-sp.png) | ![](docs/screenshots/cart-sp.png) |
+
+> 注: カート（スマホ）の写真は修正前（送料無料バーが2本表示されていた時点）の画面です。現在のコードではヘッダー側のバーをカートページで出さないようにしており、実ストアでの撮り直しはまだ行っていません。
 
 ## ベーステーマの出典とライセンス
 

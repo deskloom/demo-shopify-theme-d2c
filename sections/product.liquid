@@ -44,6 +44,7 @@
       {% form 'product', product %}
         {% assign current_variant = product.selected_or_first_available_variant %}
 
+        <div aria-live="polite" aria-atomic="true">
         <p data-variant-price>{{ current_variant.price | money }}</p>
         <p data-variant-stock>
           {% if current_variant.available %}
@@ -52,7 +53,11 @@
             {{ 'kotohana.product.sold_out' | t }}
           {% endif %}
         </p>
+        </div>
 
+        {% if product.has_only_default_variant %}
+          <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-select>
+        {% else %}
         <label for="variant-select-{{ section.id }}">{{ 'kotohana.product.variant' | t }}</label>
         <select name="id" id="variant-select-{{ section.id }}" data-variant-select>
           {% for variant in product.variants %}
@@ -64,6 +69,7 @@
             </option>
           {% endfor %}
         </select>
+        {% endif %}
 
         <label for="quantity-{{ section.id }}">{{ 'kotohana.product.quantity' | t }}</label>
         <input

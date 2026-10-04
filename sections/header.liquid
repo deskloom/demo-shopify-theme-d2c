@@ -16,17 +16,17 @@
       </shopify-account>
     {% endif %}
 
-    <a href="{{ routes.cart_url }}">
+    <a href="{{ routes.cart_url }}" aria-label="{{ 'cart.title' | t }}">
       {% if cart.item_count > 0 %}
         <sup>{{ cart.item_count }}</sup>
       {% endif %}
 
-      {{ 'icon-cart.svg' | inline_asset_content }}
+      {{ 'icon-cart.svg' | inline_asset_content | replace: '<svg', '<svg aria-hidden="true"' }}
     </a>
   </div>
 </header>
 
-{% if section.settings.show_free_bar %}
+{% if section.settings.show_free_bar and template.name != 'cart' %}
   {% render 'free-shipping-bar' %}
 {% endif %}
 
